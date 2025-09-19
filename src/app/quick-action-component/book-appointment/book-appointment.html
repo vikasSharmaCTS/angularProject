@@ -1,0 +1,49 @@
+
+<table>
+    <tr>
+      <td><label for="name">Patient Name:</label></td>
+      <td><input type="text" id="name" [(ngModel)]="patient.name" ></td></tr>
+    <tr>
+      <td><label for ="gender" >Gender</label></td>
+      <td><input type="radio" name="gender" value="male" id="male" [(ngModel)]="patient.gender">
+      <label>Male</label>
+      <input type="radio" name="gender" value="female" id="female" [(ngModel)]="patient.gender">
+      <label>Female</label></td>
+    </tr>
+    <tr>
+      <td><label for="age" >Age:</label><br></td>
+      <td><input type="number" id="age" [(ngModel)]="patient.age"></td>
+    </tr>
+    <tr>
+      <td><label>Doctor Name:</label></td>
+      <td><select [(ngModel)]="patient.doctorName">
+            <option value="">--Select--</option>
+            <option value="Navya">Navya</option>
+            <option value="Rasgna">Rasgna</option>
+            <option value="Preethi">Preethi</option>
+        </select></td>
+    </tr>
+    <tr>
+        <td><label>Specialty</label></td>
+        <td><select name="specialty" [(ngModel)]="patient.speciality">
+            <option value="Cardioloagy">Cardioloagy</option>
+            <option value="Neurology">Neurology</option>
+            <option value="Dermatology">Dermotology</option>
+        </select></td>
+    </tr>
+    <tr>
+      <td><label >Date & Time</label></td>
+      <td><input type="datetime-local" id="date" [(ngModel)]="patient.date">
+    </tr>
+   </table>
+    <button (click)="book()" class="bookappoint">Book</button>
+
+  <div *ngIf="showDetails">
+        <h3>Appointment Details</h3>
+        <p><strong>Name:</strong>{{patient.name}}</p>
+        <p><strong>Gender:</strong>{{patient.gender}}</p>
+        <p><strong>Age:</strong>{{patient.age}}</p>
+        <p><strong>Doctor Name:</strong>{{patient.doctorName}}</p>
+        <p><strong>Speciality:</strong>{{patient.speciality}}</p>
+   <p><strong>Date & Time:</strong>{{patient.date}}</p>
+</div> 

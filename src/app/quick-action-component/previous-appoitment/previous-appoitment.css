@@ -1,0 +1,20 @@
+.card{
+  background-color:#fff8f8;;
+  width:18%;
+  padding:20px;
+  margin: auto;
+  border-radius: 15px;
+  border:0.5 solid #656565;
+  
+} 
+.prev-appointment{
+  display: flex;
+  background-color: #eaeaea;;
+  margin:40px;
+  padding:30px;
+  text-align: center;
+
+}
+
+
+  

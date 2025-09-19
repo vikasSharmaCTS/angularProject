@@ -1,0 +1,10 @@
+<div class="prev-appointment">
+<!-- <h3 style="text-align: center;">Previous Appointment</h3> -->
+
+<div *ngFor="let app of prevAppointments" class="card">
+  <p><strong>{{app.doctor}}</strong>-{{app.speciality}}</p>
+  <p>Date:{{app.date}} </p>
+  <p>Time:{{app.time}}</p>
+  <button>view Report</button>
+</div>
+</div>

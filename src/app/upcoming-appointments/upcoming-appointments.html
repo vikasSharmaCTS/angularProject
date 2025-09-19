@@ -1,0 +1,13 @@
+<div class="upcoming">
+<h3>Upcoming Appointments</h3>
+<div *ngIf="appointments.length>0">
+    <div *ngFor="let appt of appointments" class="appt-card">
+        <p><strong>{{appt.doctor}}</strong>-{{appt.speciality}}</p>
+        <p class="status"><strong>Status:</strong> <span [ngClass]="
+            {'confirmed':appt.status==='Confirmed',
+            'pending':appt.status==='Pending',
+            'cancelled':appt.status==='Cancelled'}" >{{appt.status}}</span></p>
+        <p>{{appt.date}}</p>
+    </div>
+</div>
+</div>

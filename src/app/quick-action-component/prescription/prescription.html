@@ -1,0 +1,84 @@
+<div class="container mt-4">
+
+  <!-- Button to trigger modal -->
+  <!-- <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#m">
+    Prescriptions
+  </button> -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="m" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <form>
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <div class="w-100">
+            <div class="mb-3">
+              <label for="patientId" class="form-label">Patient Id</label>
+
+              <input
+                type="number"
+                name="patientId"
+                id="patientId"
+                [(ngModel)]="patientId"
+                placeholder="Patient Id"
+                class="form-control"
+              />
+              <p>Id: {{ patientId }}</p>
+
+
+            </div>
+
+            <div class="mb-3">
+              <label for="name" class="form-label">Patient Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                [(ngModel)]="name"
+                placeholder="Enter Patient Name..."
+                class="form-control"
+              />
+              <p>Name: {{ name }}</p>
+            </div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="reason" class="form-label">Reason For Visit</label>
+            <input
+              type="text"
+              id="reason"
+              [(ngModel)]="reason"
+              placeholder="fever/cold/cough/etc..."
+              class="form-control"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="prescriptions" class="form-label">Prescribed Medicines</label>
+            <textarea
+              id="prescriptions"
+              [(ngModel)]="prescriptions"
+              rows="6"
+              class="form-control"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+          ABC Hospitals Pvt Ltd.
+          <button class = "btn btn-primary" type="submit">Submit</button>
+        </div>
+
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+</div>
