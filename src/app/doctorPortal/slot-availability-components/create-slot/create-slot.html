@@ -20,6 +20,7 @@
                   [min]="minDate"
                   [(ngModel)]="selectedDate"
                   name="date"
+                  (change)="validateForm()"
                 />
               </div>
             </div>
@@ -34,6 +35,7 @@
                   class="form-control"
                   [(ngModel)]="startTime"
                   name="startTime"
+                  (change)="validateForm()"
                   required
                 />
               </div>
@@ -49,17 +51,23 @@
                   [(ngModel)]="endTime"
                   name="endTime"
                   [min]="startTime"
+                  (change)="validateForm()"
                   required
                 />
               </div>
             </div>
+            <small style="color: red">{{ validationMessage }}</small>
             <div class="text-end">
-            <button type="button" class="btn btn-secondary mt-2" (click)="addTimeSlot()">
-              Add Slot
-            </button>
+              <button
+                type="button"
+                class="btn btn-secondary mt-2"
+                [disabled]="!isFormValid"
+                (click)="addTimeSlot()"
+              >
+                Add Slot
+              </button>
+            </div>
           </div>
-          </div>
-
 
           <div
             class="container border p-3"
@@ -69,15 +77,21 @@
             <div *ngFor="let date of getDates()">
               <h5>{{ date }}</h5>
               <ul class="list-group mb-3">
-                <li class="list-group-item" *ngFor="let slot of newTimeSlotsByDate[date];index as i">
-                  {{ slot.startTime }} to {{slot.endTime}}
+                <li
+                  class="list-group-item"
+                  *ngFor="let slot of newTimeSlotsByDate[date]; index as i"
+                >
+                  {{ slot.startTime }} to {{ slot.endTime }}
 
-                  <span style="color: red; cursor: pointer; float: right"
-                   (click)="deleteTimeSlot(i,date)"
+                  <span
+                    style="color: red; cursor: pointer; float: right"
+                    (click)="deleteTimeSlot(i, date)"
                     >Delete
                   </span>
-                  <span class="mx-2" style="color: blue; cursor: pointer; float: right"
-                   (click)="editTimeSlot(i,date,slot.startTime,slot.endTime)"
+                  <span
+                    class="mx-2"
+                    style="color: blue; cursor: pointer; float: right"
+                    (click)="editTimeSlot(i, date, slot.startTime, slot.endTime)"
                     >Edit
                   </span>
                 </li>
@@ -103,4 +117,3 @@
 
 
 -->
-

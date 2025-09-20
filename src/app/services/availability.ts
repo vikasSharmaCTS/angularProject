@@ -46,26 +46,77 @@ export class Availability {
     }
   }
 
-  editSlot(date: string, updatedSlot: { id: string; startTime: string; endTime: string }): void {
-    const slots = this.savedSlots[date];
-    if (!slots) return;
+  // editSlot(date: string, updatedSlot: { id: string; startTime: string; endTime: string }): void {
+  //   const slots = this.savedSlots[date];
+  //   if (!slots) return;
 
-    const index = slots.findIndex((s: any) => s.id === updatedSlot.id);
+  //   const index = slots.findIndex((s: any) => s.id === updatedSlot.id);
+  //   if (index === -1) return;
+
+  //   const overlaps = slots.some(
+  //     (s: any) =>
+  //       s.id !== updatedSlot.id &&
+  //       updatedSlot.startTime < s.endTime &&
+  //       updatedSlot.endTime > s.startTime
+  //   );
+
+  //   if (overlaps) {
+  //     alert(`Cannot update slot: overlaps with another slot on ${date}`);
+  //     return;
+  //   }
+
+  //   slots[index] = updatedSlot;
+  // }
+
+  editSlot(
+    oldDate: string,
+    newDate: string,
+    updatedSlot: { id: string; startTime: string; endTime: string }
+  ): void {
+    // Remove from old date array
+    const oldSlots = this.savedSlots[oldDate];
+    if (!oldSlots) return;
+
+    const index = oldSlots.findIndex((s: any) => s.id === updatedSlot.id);
     if (index === -1) return;
 
-    const overlaps = slots.some(
-      (s: any) =>
-        s.id !== updatedSlot.id &&
-        updatedSlot.startTime < s.endTime &&
-        updatedSlot.endTime > s.startTime
-    );
-
-    if (overlaps) {
-      alert(`Cannot update slot: overlaps with another slot on ${date}`);
+    // If date hasn't changed, just update in place
+    if (oldDate === newDate) {
+      const overlaps = oldSlots.some(
+        (s: any) =>
+          s.id !== updatedSlot.id &&
+          updatedSlot.startTime < s.endTime &&
+          updatedSlot.endTime > s.startTime
+      );
+      if (overlaps) {
+        alert(`Cannot update slot: overlaps with another slot on ${newDate}`);
+        return;
+      }
+      oldSlots[index] = updatedSlot;
       return;
     }
 
-    slots[index] = updatedSlot;
+    // If date changed, remove from old date and add to new date
+    oldSlots.splice(index, 1);
+
+    // Ensure new date array exists
+    if (!this.savedSlots[newDate]) {
+      this.savedSlots[newDate] = [];
+    }
+    const newSlots = this.savedSlots[newDate];
+
+    // Check for overlaps in new date
+    const overlaps = newSlots.some(
+      (s: any) => updatedSlot.startTime < s.endTime && updatedSlot.endTime > s.startTime
+    );
+    if (overlaps) {
+      alert(`Cannot update slot: overlaps with another slot on ${newDate}`);
+      // Optionally, add back to old date if needed
+      oldSlots.push(updatedSlot);
+      return;
+    }
+
+    newSlots.push(updatedSlot);
   }
 
   deleteSlot(date: string, slotId: string): void {
