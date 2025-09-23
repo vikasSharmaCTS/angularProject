@@ -94,17 +94,7 @@ validateForm() {
         return;
       }
 
-      const newStart = this.startTime;
-      const newEnd = this.endTime;
 
-      if (
-        (newStart >= obj.startTime && newStart < obj.endTime) ||
-        (newEnd > obj.startTime && newEnd <= obj.endTime) ||
-        (newStart <= obj.startTime && newEnd >= obj.endTime)
-      ) {
-        // alert('This slot overlaps with an existing booking');
-        // return;
-      }
     }
     this.newTimeSlotsByDate[date].push({ startTime: this.startTime, endTime: this.endTime });
   }

@@ -1,4 +1,4 @@
-<div class="container bg-light rounded" style="min-height: 70vh;">
+<div class="container bg-light rounded" style="min-height: 70vh">
   <div class="modal-header row mb-2">
     <div class="col-10">
       <h3>Manage Availability</h3>
@@ -26,20 +26,23 @@
         <tbody>
           <tr *ngFor="let slot of tableData; let i = index">
             <td>{{ i + 1 }}</td>
-            <td>{{ slot.date }}</td>
+            <td>{{ slot.date | date }}</td>
             <td>{{ slot.startTime }}</td>
             <td>{{ slot.endTime }}</td>
             <td>
               <span
                 class="mx-2"
-                style="color: blue; cursor: pointer;"
+                style="color: blue; cursor: pointer"
                 (click)="editTimeSlot(slot)"
-                >Edit
+                title="Edit Slot"
+              >
+                <i class="fas fa-edit"></i>
               </span>
               <span
-                style="color: red; cursor: pointer;"
+                style="color: red; cursor: pointer"
                 (click)="deleteTimeSlot(slot)"
-                >Delete
+                title="Delete Slot"
+                ><i class="fas fa-trash"></i>
               </span>
             </td>
           </tr>
@@ -49,22 +52,9 @@
   </div>
 </div>
 
-
-
-
 <app-create-slot
-    *ngIf="showSlotForm"
+  *ngIf="showSlotForm"
   [slotData]="isEditSlot ? selectedSlot : null"
   [editSlot]="isEditSlot"
   (closeModal)="cancelModal()"
 ></app-create-slot>
-
-<!-- <app-create-slot
-    *ngIf="showSlotForm"
-  [slotData]="isEditSlot ? selectedSlot : null"
-  (newPayload)="newHandlePayload($event)"
-  (closeModal)="cancelModal()"
-></app-create-slot>
-  -->
-
-

@@ -6,11 +6,11 @@ import { Injectable } from '@angular/core';
 export class Availability {
   private savedSlots: any = {};
 
-  // Save the availability data
-  saveAvailability(payload: any): void {
-    this.savedSlots = { ...payload };
-    console.log('Saved slots:', this.savedSlots);
-  }
+  // // Save the availability data
+  // saveAvailability(payload: any): void {
+  //   this.savedSlots = { ...payload };
+  //   console.log('Saved slots:', this.savedSlots);
+  // }
 
   // Get the saved slots
   getSavedSlots(): any {

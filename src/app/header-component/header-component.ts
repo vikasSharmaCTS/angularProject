@@ -7,8 +7,8 @@ import { Component, Input,Output,EventEmitter } from '@angular/core';
   styleUrl: './header-component.css'
 })
 export class HeaderComponent {
- userName:string="Jyothirmai"
- 
- 
-  
+ userName:string="Vikas"
+
+
+
 }
