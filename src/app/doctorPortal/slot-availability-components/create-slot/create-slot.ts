@@ -21,6 +21,10 @@ export class CreateSlot implements OnInit {
   endTime: string = '';
   minDate: string = '';
   newTimeSlotsByDate: { [date: string]: { startTime: string; endTime: string }[] } = {};
+ validationMessage: string = '';
+  isFormValid: boolean = false;
+  orignalDate:string = ''
+
 
   constructor(private avaiavailabilityService: Availability) {}
   ngOnInit(): void {
@@ -28,6 +32,7 @@ export class CreateSlot implements OnInit {
     this.minDate = today.toISOString().split('T')[0];
 
     this.selectedDate = this.slotData?.date || '';
+    this.orignalDate = this.selectedDate;
     this.startTime = this.slotData?.startTime || '';
     this.endTime = this.slotData?.endTime || '';
   }
@@ -39,6 +44,33 @@ export class CreateSlot implements OnInit {
   get hasTimeSlots(): boolean {
     return Object.keys(this.newTimeSlotsByDate).length > 0;
   }
+
+validateForm() {
+    this.validationMessage = '';
+    this.isFormValid = true;
+
+    const today = new Date();
+    const selected = new Date(this.selectedDate);
+
+    // If selected date is today, check start time >= current time
+    if (this.selectedDate === this.minDate) {
+      const nowTime = today.toTimeString().slice(0, 5); // "HH:mm"
+      if (this.startTime && this.startTime < nowTime) {
+        this.validationMessage = 'Start time cannot be less than current time for today.';
+        this.isFormValid = false;
+        return;
+      }
+    }
+
+    // End time must be greater than start time
+    if (this.startTime && this.endTime && this.endTime <= this.startTime) {
+      this.validationMessage = 'End time must be greater than start time.';
+      this.isFormValid = false;
+      return;
+    }
+  }
+
+
 
   addTimeSlot() {
     if (!this.selectedDate || !this.startTime || !this.endTime) {
@@ -87,7 +119,7 @@ export class CreateSlot implements OnInit {
         startTime:this.startTime,
         endTime:this.endTime
       }
-      this.avaiavailabilityService.editSlot(this.selectedDate, editData);
+      this.avaiavailabilityService.editSlot(this.orignalDate,this.selectedDate, editData);
     }else{
       this.avaiavailabilityService.addSlot(this.newTimeSlotsByDate);
     }
